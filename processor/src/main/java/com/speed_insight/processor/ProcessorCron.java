@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.speed_insight.processor.service.MainScoreService;
 import com.speed_insight.processor.service.MasterService;
+import com.speed_insight.processor.service.ResourceSummaryService;
 import com.speed_insight.processor.service.SummaryService;
 import com.speed_insight.processor.utils.DataParser;
 
@@ -25,6 +26,9 @@ public class ProcessorCron {
 	@Autowired
 	private SummaryService summaryService;
 	
+	@Autowired
+	private ResourceSummaryService resourceSummaryService;
+	
 	@Scheduled(cron="* * * * * *")
 	public void saveJson() throws Exception {
 		
@@ -33,5 +37,6 @@ public class ProcessorCron {
 		Long id = masterService.setMasterData(target);
 		mainScoreService.setMainScoreData(id, target);
 		summaryService.setSummaryData(id, target);
+		resourceSummaryService.setSummaryData(id, target);
 	}
 }
