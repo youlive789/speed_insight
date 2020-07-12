@@ -28,6 +28,9 @@ public class DataParser {
 		if (jsonLists.length < 1) return new JSONObject();
 		File target = jsonLists[0];
 		
+		// 아직 작업이 완료되지 않은 파일이라면 빈 객체를 리턴한다.
+		if (target.getTotalSpace() < 10) return new JSONObject();
+		
 		String targetJsonString = "";
 		try {
 			targetJsonString = this.readTargetJsonFile(target.getCanonicalPath());
