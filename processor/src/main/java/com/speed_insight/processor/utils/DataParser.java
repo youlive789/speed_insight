@@ -23,12 +23,18 @@ public class DataParser {
 	private JSONObject getTargetJson() {
 		File dirDataJson = new File(DIR_DATA_JSON);
 		File[] jsonLists = dirDataJson.listFiles();
+		
+		// JSON 폴더에 아무것도 없다면 빈 객체를 리턴한다.
+		if (jsonLists.length < 1) return new JSONObject();
 		File target = jsonLists[0];
 		
 		String targetJsonString = "";
 		try {
 			targetJsonString = this.readTargetJsonFile(target.getCanonicalPath());
-			//this.deleteFile(target);
+			
+			// GC에 아직 파일 객체가 남아있다면 파일 삭제가 안된다.
+			System.gc();
+			target.delete();
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
@@ -68,9 +74,5 @@ public class DataParser {
 		}
 		
 		return jsonString;
-	}
-	
-	private void deleteFile(File target) {
-		target.delete();
 	}
 }

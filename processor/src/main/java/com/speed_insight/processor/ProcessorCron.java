@@ -38,10 +38,15 @@ public class ProcessorCron {
 		
 		JSONObject target = dataParser.nextTargetData();
 		
-		Long id = masterService.setMasterData(target);
-		mainScoreService.setMainScoreData(id, target);
-		summaryService.setSummaryData(id, target);
-		resourceSummaryService.setSummaryData(id, target);
-		networkServerLatencyService.setNetworkServerLatencyData(id, target);
+		if (target.isEmpty()) {
+			System.out.println("처리할 파일이 없습니다.");
+		}
+		else {
+			Long id = masterService.setMasterData(target);
+			mainScoreService.setMainScoreData(id, target);
+			summaryService.setSummaryData(id, target);
+			resourceSummaryService.setSummaryData(id, target);
+			networkServerLatencyService.setNetworkServerLatencyData(id, target);
+		}
 	}
 }
