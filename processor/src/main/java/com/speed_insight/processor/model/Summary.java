@@ -26,7 +26,7 @@ public class Summary {
 	private Integer numTasks;
 	
 	@Column(name="RTT")
-	private Integer rtt;
+	private Float rtt;
 	
 	@Column(name="THROUGHPUT")
 	private Float throughput;
@@ -50,7 +50,7 @@ public class Summary {
 	
 	@Builder
 	public Summary(Long id, Integer numRequest, Integer numScripts, Integer numFonts,
-		Integer numTasks, Integer rtt, Float throughput, Float maxRtt, Float maxServerLatency, 
+		Integer numTasks, Float rtt, Float throughput, Float maxRtt, Float maxServerLatency, 
 		Float totalByteWeight, Float totalTaskTime, Float mainDocumentTransferSize
 	) {
 		this.id = id;

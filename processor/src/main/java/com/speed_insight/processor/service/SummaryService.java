@@ -1,5 +1,6 @@
 package com.speed_insight.processor.service;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,27 +21,27 @@ public class SummaryService {
 	private void processTarget(Long id, JSONObject target) {
 		
 		JSONObject audits = (JSONObject)target.get("audits");
+		JSONObject diagnostics = (JSONObject)audits.get("diagnostics");
+		JSONObject details = (JSONObject)diagnostics.get("details");
 		
-		JSONObject fcp = (JSONObject)audits.get("first-contentful-paint");
-		Float fcpScore = Float.parseFloat(fcp.get("score").toString());
+		JSONArray itemsArray = (JSONArray)details.get("items");
+		JSONObject items = (JSONObject)itemsArray.get(0);
 		
-		JSONObject si = (JSONObject)audits.get("speed-index");
-		Float siScore = Float.parseFloat(si.get("score").toString());
-		
-		JSONObject lcp = (JSONObject)audits.get("largest-contentful-paint");
-		Float lcpScore = Float.parseFloat(lcp.get("score").toString());
-		
-		JSONObject interactive = (JSONObject)audits.get("interactive");
-		Float interScore = Float.parseFloat(interactive.get("score").toString());
-		
-		JSONObject tbt = (JSONObject)audits.get("total-blocking-time");
-		Float tbtScore = Float.parseFloat(tbt.get("score").toString());
-		
-		JSONObject cls = (JSONObject)audits.get("cumulative-layout-shift");
-		Float clsScore = Float.parseFloat(cls.get("score").toString());
-		
-		Summary summary = new Summary(
-			// TODO: 
+		Integer numRequests = Integer.parseInt(items.get("numRequests").toString());
+		Integer numScripts = Integer.parseInt(items.get("numScripts").toString());
+		Integer numFonts = Integer.parseInt(items.get("numFonts").toString());
+		Integer numTasks = Integer.parseInt(items.get("numTasks").toString());
+		Float rtt = Float.parseFloat(items.get("rtt").toString());
+		Float throughput = Float.parseFloat(items.get("throughput").toString());
+		Float maxRtt = Float.parseFloat(items.get("maxRtt").toString());
+		Float maxServerLatency = Float.parseFloat(items.get("maxServerLatency").toString());
+		Float totalByteWeight = Float.parseFloat(items.get("totalByteWeight").toString());
+		Float totalTaskTime = Float.parseFloat(items.get("totalTaskTime").toString());
+		Float mainDocumentTransferSize = Float.parseFloat(items.get("mainDocumentTransferSize").toString());
+
+		Summary summary = new Summary( 
+			id, numRequests, numScripts, numFonts, numTasks, rtt,
+			throughput, maxRtt, maxServerLatency, totalByteWeight, totalTaskTime, mainDocumentTransferSize
 		);
 		
 		summaryRepository.save(summary);
