@@ -16,9 +16,15 @@ public class CollectTargetParserTests {
 	@Test
 	void test_can_read_target_json_file() {
 		CollectTargetParser targetParser = new CollectTargetParser();
-		List<String> targetList = targetParser.getCollectTargetList();
-		for (String target : targetList) {
-			System.out.println(target); 
+		List<String> targetList;
+		try {
+			targetList = targetParser.getCollectTargetList();
+			for (String target : targetList) {
+				System.out.println(target); 
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
