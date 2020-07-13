@@ -33,14 +33,14 @@ public class CollectorCron {
 		} 
 	}
 	
-	@Scheduled(cron="* * * * * *")
+	@Scheduled(cron="0 * * * * *")
 	public void desktopJob() throws Exception {
 		if (this.targetList != null) {
 			executeCommand("desktop");
 		}
 	}
 	
-	@Scheduled(cron="* * * * * *")
+	@Scheduled(cron="0 * * * * *")
 	public void mobileJob() throws Exception {
 		if (this.targetList != null) {
 			executeCommand("mobile");

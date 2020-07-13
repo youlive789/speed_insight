@@ -38,7 +38,7 @@ public class ProcessorCron {
 		
 		JSONObject target = dataParser.nextTargetData();
 		
-		if (target.isEmpty()) {
+		if (target == null || target.isEmpty()) {
 			System.out.println("처리할 파일이 없습니다.");
 		}
 		else {
