@@ -51,11 +51,24 @@
 			</nav>
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-					<h1 class="h2">Dashboard</h1>
+				<div class="chart-area">
+					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+						<h1 class="h3">수집 URL별 평균종합점수</h1>
+					</div>
+					<canvas class="my-4" id="myChart" width="900" height="380"></canvas>
+				</div>	
+				<div class="chart-area">
+					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+						<h1 class="h3">수집 URL별 평균 최대지연시간</h1>
+					</div>
+					<canvas class="my-4" id="myChart" width="900" height="380"></canvas>
 				</div>
-
-				<canvas class="my-4" id="myChart" width="900" height="380"></canvas>				
+				<div class="chart-area">
+					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+						<h1 class="h3">수집 URL별 평균수행시간</h1>
+					</div>
+					<canvas class="my-4" id="myChart" width="900" height="380"></canvas>
+				</div>	
 			</main>
 		</div>
 	</div>

@@ -1,6 +1,7 @@
 package com.speed_insight.dashboard.service;
 
-import org.json.simple.JSONObject;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,5 +13,4 @@ public class MainScoreService {
 	
 	@Autowired
 	private MainScoreRepository mainScoreRepository;
-	
 }
