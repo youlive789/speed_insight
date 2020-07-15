@@ -1,5 +1,7 @@
 package com.speed_insight.dashboard.repository;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -16,8 +18,18 @@ public class MainScoreRepositoryTests {
 	
 	@Test
 	void test1() {
-		List<MainScore> scores = repo.findAll();
-		System.out.println(scores);
+		
+		List<Long> ids = new ArrayList<Long>();
+		ids.add(new Long(123));
+		ids.add(new Long(124));
+		ids.add(new Long(125));
+		
+		List<MainScore> lists = repo.findByIdIn(ids);
+		for (Method ms : lists.get(0).getClass().getMethods()) {
+			System.out.println(ms.getName());
+		}
+			
+			
 	}
 
 }

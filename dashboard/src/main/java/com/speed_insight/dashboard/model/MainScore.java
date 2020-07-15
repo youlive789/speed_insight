@@ -3,12 +3,11 @@ package com.speed_insight.dashboard.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 
 import lombok.Builder;
+import lombok.Data;
 
+@Data
 @Entity(name = "MAIN_SCORE")
 public class MainScore {
 
@@ -35,6 +34,10 @@ public class MainScore {
 	private Float cumulativeLayoutShift;
 	
 	public MainScore() {}
+	
+	public Float getFirstContentfulPaint() {
+		return this.firstContentfulPaint;
+	}
 	
 	@Builder
 	public MainScore(Long id, Float firstContentfulPaint, Float speedIndex, Float largestContentfulPaint, 
