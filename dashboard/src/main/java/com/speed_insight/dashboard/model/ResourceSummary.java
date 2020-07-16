@@ -28,4 +28,30 @@ public class ResourceSummary {
 		this.requestCount = requestCount;
 		this.size = size;
 	}
+
+	public Long getId() {
+		return this.resourceSummaryId.getId();
+	}
+
+	public String getResourceType() {
+		return this.resourceSummaryId.getResourceType();
+	}
+
+	public Integer getRequestCount() {
+		return requestCount;
+	}
+
+	public void setRequestCount(Integer requestCount) {
+		this.requestCount = requestCount;
+	}
+
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+	
+	
 }

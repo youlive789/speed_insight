@@ -25,4 +25,22 @@ public class NetworkServerLatencyId implements Serializable {
 		this.Id = id;
 		this.origin = origin;
 	}
+
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+	
+	
 }

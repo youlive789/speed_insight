@@ -25,4 +25,21 @@ public class ResourceSummaryId implements Serializable {
 		this.id = id;
 		this.resourceType = resourceType;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getResourceType() {
+		return resourceType;
+	}
+
+	public void setResourceType(String resourceType) {
+		this.resourceType = resourceType;
+	}
+	
 }

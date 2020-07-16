@@ -38,6 +38,34 @@ public class Master {
 	}
 	
 	public Long getId() {
-		return this.id;
+		return id;
+	}
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getDevice() {
+		return device;
+	}
+
+	public void setDevice(String device) {
+		this.device = device;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

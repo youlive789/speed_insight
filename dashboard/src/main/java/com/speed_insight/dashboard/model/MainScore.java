@@ -50,4 +50,57 @@ public class MainScore {
 		this.totalBlockingTime = totalBlockingTime;
 		this.cumulativeLayoutShift = cumulativeLayoutShift;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Float getSpeedIndex() {
+		return speedIndex;
+	}
+
+	public void setSpeedIndex(Float speedIndex) {
+		this.speedIndex = speedIndex;
+	}
+
+	public Float getLargestContentfulPaint() {
+		return largestContentfulPaint;
+	}
+
+	public void setLargestContentfulPaint(Float largestContentfulPaint) {
+		this.largestContentfulPaint = largestContentfulPaint;
+	}
+
+	public Float getTimeToInteractive() {
+		return timeToInteractive;
+	}
+
+	public void setTimeToInteractive(Float timeToInteractive) {
+		this.timeToInteractive = timeToInteractive;
+	}
+
+	public Float getTotalBlockingTime() {
+		return totalBlockingTime;
+	}
+
+	public void setTotalBlockingTime(Float totalBlockingTime) {
+		this.totalBlockingTime = totalBlockingTime;
+	}
+
+	public Float getCumulativeLayoutShift() {
+		return cumulativeLayoutShift;
+	}
+
+	public void setCumulativeLayoutShift(Float cumulativeLayoutShift) {
+		this.cumulativeLayoutShift = cumulativeLayoutShift;
+	}
+
+	public void setFirstContentfulPaint(Float firstContentfulPaint) {
+		this.firstContentfulPaint = firstContentfulPaint;
+	}
+	
 }

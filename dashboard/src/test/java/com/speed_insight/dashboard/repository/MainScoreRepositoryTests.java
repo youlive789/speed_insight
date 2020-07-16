@@ -17,19 +17,17 @@ public class MainScoreRepositoryTests {
 	private MainScoreRepository repo;
 	
 	@Test
-	void test1() {
+	void TestgetMainScoreByIds() {
 		
 		List<Long> ids = new ArrayList<Long>();
-		ids.add(new Long(123));
-		ids.add(new Long(124));
-		ids.add(new Long(125));
+		ids.add(new Long(3));
+		ids.add(new Long(4));
+		ids.add(new Long(5));
 		
 		List<MainScore> lists = repo.findByIdIn(ids);
-		for (Method ms : lists.get(0).getClass().getMethods()) {
-			System.out.println(ms.getName());
+		for (MainScore ms : lists) {
+			System.out.println(ms.getLargestContentfulPaint());
 		}
-			
-			
 	}
 
 }

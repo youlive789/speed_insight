@@ -24,4 +24,22 @@ public class NetworkServerLatency {
 		this.id = id;
 		this.serverResponseTime = serverResponseTime;
 	}
+
+	public Long getId() {
+		return this.id.getId();
+	}
+
+	public String getOrigin() {
+		return this.id.getOrigin();
+	}
+
+	public Float getServerResponseTime() {
+		return serverResponseTime;
+	}
+
+	public void setServerResponseTime(Float serverResponseTime) {
+		this.serverResponseTime = serverResponseTime;
+	}
+	
+	
 }
