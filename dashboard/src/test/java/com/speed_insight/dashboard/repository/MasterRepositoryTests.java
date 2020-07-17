@@ -53,4 +53,16 @@ public class MasterRepositoryTests {
 		for (Master m : list) 
 			System.out.println(m.getId());
 	}
+	
+	@Test
+	void testGetIdsByUrls() {
+		List<String> urls = new ArrayList<String>();
+		urls.add("https://www.naver.com/");
+		urls.add("https://www.hankyung.com/");
+		
+		List<Master> lists = repo.findByUrlIn(urls);
+		for (Master m : lists) {
+			System.out.println(m.getId() + " " + m.getUrl());
+		}
+	}
 }
