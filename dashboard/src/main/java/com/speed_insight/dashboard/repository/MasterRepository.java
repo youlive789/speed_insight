@@ -11,5 +11,6 @@ import com.speed_insight.dashboard.model.Master;
 @Repository
 public interface MasterRepository extends JpaRepository<Master, Long> {
 	public List<Master> findByUrl(String url);
+	public List<Master> findByUrlIn(List<String> urls);
 	public List<Master> findByDateBetween(Date start, Date end);
 }

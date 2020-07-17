@@ -12,8 +12,12 @@ import lombok.Builder;
 public class Summary {
 	
 	@Id
-	@Column(name="ID")
+	@Column(name="SUMMARY_ID")
 	private Long id;
+	
+	@OneToOne
+	@JoinColumn(name="ID")
+	private Master master;
 	
 	@Column(name="NUM_REQUEST")
 	private Integer numRequest;
@@ -51,11 +55,11 @@ public class Summary {
 	public Summary() {}
 	
 	@Builder
-	public Summary(Long id, Integer numRequest, Integer numScripts, Integer numFonts,
+	public Summary(Master id, Integer numRequest, Integer numScripts, Integer numFonts,
 		Integer numTasks, Float rtt, Float throughput, Float maxRtt, Float maxServerLatency, 
 		Float totalByteWeight, Float totalTaskTime, Float mainDocumentTransferSize
 	) {
-		this.id = id;
+		this.master = id;
 		this.numRequest = numRequest;
 		this.numScripts = numScripts;
 		this.numFonts = numFonts;

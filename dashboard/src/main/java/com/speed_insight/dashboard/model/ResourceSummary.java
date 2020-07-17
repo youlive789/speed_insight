@@ -3,6 +3,8 @@ package com.speed_insight.dashboard.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.Builder;
 
@@ -10,8 +12,12 @@ import lombok.Builder;
 public class ResourceSummary {
 	
 	@Id
-	@Column(name="ID")
+	@Column(name="RESOURCE_SUMMARY_ID")
 	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name="ID")
+	private Master master;
 	
 	@Column(name="RESOURCE_TYPE")
 	private String resourceType;
@@ -25,8 +31,8 @@ public class ResourceSummary {
 	public ResourceSummary() {}
 
 	@Builder
-	public ResourceSummary(Long id, String resourceType, Integer requestCount, Integer size) {
-		this.id = id;
+	public ResourceSummary(Master id, String resourceType, Integer requestCount, Integer size) {
+		this.master = id;
 		this.resourceType = resourceType;
 		this.requestCount = requestCount;
 		this.size = size;

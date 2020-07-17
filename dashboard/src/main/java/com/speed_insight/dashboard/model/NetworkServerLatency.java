@@ -3,7 +3,8 @@ package com.speed_insight.dashboard.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.Builder;
 
@@ -11,8 +12,12 @@ import lombok.Builder;
 public class NetworkServerLatency {
 	
 	@Id
-	@Column(name="Id")
+	@Column(name="NETWORK_SERVER_LATENCY_ID")
 	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name="ID")
+	private Master master;
 	
 	@Column(name="ORIGIN")
 	private String origin;
@@ -23,8 +28,8 @@ public class NetworkServerLatency {
 	public NetworkServerLatency() {}
 	
 	@Builder
-	public NetworkServerLatency(Long id, String origin, Float serverResponseTime) {
-		this.id = id;
+	public NetworkServerLatency(Master id, String origin, Float serverResponseTime) {
+		this.master = id;
 		this.origin = origin;
 		this.serverResponseTime = serverResponseTime;
 	}

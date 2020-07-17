@@ -7,8 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.speed_insight.dashboard.model.MainScore;
+import com.speed_insight.dashboard.model.Master;
 
 @Repository
 public interface MainScoreRepository extends JpaRepository<MainScore, Long> {
-	public List<MainScore> findByIdIn(Collection<Long> idList); 
+	public List<MainScore> findByMasterIn(Collection<Master> idList); 
 }
