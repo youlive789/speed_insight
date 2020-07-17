@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.speed_insight.processor.model.MainScore;
+import com.speed_insight.processor.model.Master;
 import com.speed_insight.processor.repository.MainScoreRepository;
 
 @Service
@@ -13,11 +14,11 @@ public class MainScoreService {
 	@Autowired
 	private MainScoreRepository mainScoreRepository;
 	
-	public void setMainScoreData(Long id, JSONObject target) {
+	public void setMainScoreData(Master id, JSONObject target) {
 		this.processTarget(id, target);
 	}
 	
-	private void processTarget(Long id, JSONObject target) {
+	private void processTarget(Master id, JSONObject target) {
 		
 		JSONObject audits = (JSONObject)target.get("audits");
 		

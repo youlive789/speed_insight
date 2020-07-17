@@ -15,11 +15,11 @@ public class MasterService {
 	@Autowired
 	private MasterRepository masterRepository;
 	
-	public Long setMasterData(JSONObject target) {
+	public Master setMasterData(JSONObject target) {
 		return this.processTarget(target);
 	}
 	
-	private Long processTarget(JSONObject target) {
+	private Master processTarget(JSONObject target) {
 		
 		String url = target.get("requestedUrl").toString();
 		Date date = new Date(new java.util.Date().getTime());
@@ -38,6 +38,6 @@ public class MasterService {
 		Master master = new Master(url, date, device);
 		masterRepository.save(master);
 		
-		return master.getId();
+		return master;
 	}
 }

@@ -10,6 +10,5 @@ import com.speed_insight.dashboard.model.MainScore;
 
 @Repository
 public interface MainScoreRepository extends JpaRepository<MainScore, Long> {
-	
 	public List<MainScore> findByIdIn(Collection<Long> idList); 
 }

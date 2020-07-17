@@ -8,8 +8,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.speed_insight.processor.model.Master;
 import com.speed_insight.processor.model.NetworkServerLatency;
-import com.speed_insight.processor.model.NetworkServerLatencyId;
 import com.speed_insight.processor.repository.NetworkServerLatencyRepository;
 
 @Service
@@ -18,11 +18,11 @@ public class NetworkServerLatencyService {
 	@Autowired
 	private NetworkServerLatencyRepository networkServiceRepository;
 	
-	public void setNetworkServerLatencyData(Long id, JSONObject target) {
+	public void setNetworkServerLatencyData(Master id, JSONObject target) {
 		this.processTarget(id, target);
 	}
 	
-	private void processTarget(Long id, JSONObject target) {
+	private void processTarget(Master id, JSONObject target) {
 		
 		JSONObject audits = (JSONObject)target.get("audits");
 		JSONObject rs = (JSONObject)audits.get("network-server-latency");
@@ -36,8 +36,7 @@ public class NetworkServerLatencyService {
 			String origin = item.get("origin").toString();
 			Float serverReponseTime = Float.parseFloat(item.get("serverResponseTime").toString());
 			
-			NetworkServerLatencyId ids = new NetworkServerLatencyId(id, origin);
-			NetworkServerLatency networkServerLatency = new NetworkServerLatency(ids, serverReponseTime);
+			NetworkServerLatency networkServerLatency = new NetworkServerLatency(id, origin, serverReponseTime);
 			lists.add(networkServerLatency);
 		}
 		

@@ -1,20 +1,29 @@
 package com.speed_insight.processor.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.Builder;
-import lombok.Data;
 
 @Entity(name="RESOURCE_SUMMARY")
 public class ResourceSummary {
 	
-	@EmbeddedId
-	private ResourceSummaryId resourceSummaryId;
+	@Id
+	@Column(name="RESOURCE_SUMMARY_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name="ID")
+	private Master master;
+	
+	@Column(name="RESOURCE_TYPE")
+	private String resourceType;
 	
 	@Column(name="REQUEST_COUNT")
 	private Integer requestCount;
@@ -25,8 +34,9 @@ public class ResourceSummary {
 	public ResourceSummary() {}
 
 	@Builder
-	public ResourceSummary(ResourceSummaryId resourceSummaryId, Integer requestCount, Integer size) {
-		this.resourceSummaryId = resourceSummaryId;
+	public ResourceSummary(Master master, String resourceType, Integer requestCount, Integer size) {
+		this.master = master;
+		this.resourceType = resourceType;
 		this.requestCount = requestCount;
 		this.size = size;
 	}

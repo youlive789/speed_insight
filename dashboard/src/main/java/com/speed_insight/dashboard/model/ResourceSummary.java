@@ -1,18 +1,20 @@
 package com.speed_insight.dashboard.model;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
 
 import lombok.Builder;
 
 @Entity(name="RESOURCE_SUMMARY")
 public class ResourceSummary {
 	
-	@EmbeddedId
-	private ResourceSummaryId resourceSummaryId;
+	@Id
+	@Column(name="ID")
+	private Long id;
+	
+	@Column(name="RESOURCE_TYPE")
+	private String resourceType;
 	
 	@Column(name="REQUEST_COUNT")
 	private Integer requestCount;
@@ -23,18 +25,19 @@ public class ResourceSummary {
 	public ResourceSummary() {}
 
 	@Builder
-	public ResourceSummary(ResourceSummaryId resourceSummaryId, Integer requestCount, Integer size) {
-		this.resourceSummaryId = resourceSummaryId;
+	public ResourceSummary(Long id, String resourceType, Integer requestCount, Integer size) {
+		this.id = id;
+		this.resourceType = resourceType;
 		this.requestCount = requestCount;
 		this.size = size;
 	}
 
 	public Long getId() {
-		return this.resourceSummaryId.getId();
+		return this.id;
 	}
 
 	public String getResourceType() {
-		return this.resourceSummaryId.getResourceType();
+		return this.resourceType;
 	}
 
 	public Integer getRequestCount() {

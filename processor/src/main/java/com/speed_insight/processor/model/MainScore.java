@@ -2,6 +2,8 @@ package com.speed_insight.processor.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
@@ -13,8 +15,13 @@ import lombok.Builder;
 public class MainScore {
 
 	@Id
-	@Column(name="ID")
+	@Column(name="MAIN_SCORE_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@OneToOne
+	@JoinColumn(name="ID")
+	private Master master;
 	
 	@Column(name="FIRST_CONTENTFUL_PAINT")
 	private Float firstContentfulPaint;
@@ -37,9 +44,9 @@ public class MainScore {
 	public MainScore() {}
 	
 	@Builder
-	public MainScore(Long id, Float firstContentfulPaint, Float speedIndex, Float largestContentfulPaint, 
+	public MainScore(Master master, Float firstContentfulPaint, Float speedIndex, Float largestContentfulPaint, 
 			Float timeToInteractive, Float totalBlockingTime, Float cumulativeLayoutShift) {
-		this.id = id;
+		this.master = master;
 		this.firstContentfulPaint = firstContentfulPaint;
 		this.speedIndex = speedIndex;
 		this.largestContentfulPaint = largestContentfulPaint;

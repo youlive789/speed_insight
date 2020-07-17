@@ -8,8 +8,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.speed_insight.processor.model.Master;
 import com.speed_insight.processor.model.ResourceSummary;
-import com.speed_insight.processor.model.ResourceSummaryId;
 import com.speed_insight.processor.repository.ResourceSummaryRepository;
 
 @Service
@@ -18,11 +18,11 @@ public class ResourceSummaryService {
 	@Autowired
 	private ResourceSummaryRepository resourceSummaryRepository;
 	
-	public void setSummaryData(Long id, JSONObject target) {
+	public void setSummaryData(Master id, JSONObject target) {
 		this.processTarget(id, target);
 	}
 	
-	private void processTarget(Long id, JSONObject target) {
+	private void processTarget(Master id, JSONObject target) {
 		
 		JSONObject audits = (JSONObject)target.get("audits");
 		JSONObject rs = (JSONObject)audits.get("resource-summary");
@@ -37,8 +37,7 @@ public class ResourceSummaryService {
 			Integer requestCount = Integer.parseInt(item.get("requestCount").toString());
 			Integer transferSizse = Integer.parseInt(item.get("transferSize").toString());
 			
-			ResourceSummaryId ids = new ResourceSummaryId(id, resourceType);
-			ResourceSummary resourceSummary = new ResourceSummary(ids, requestCount, transferSizse);
+			ResourceSummary resourceSummary = new ResourceSummary(id, resourceType, requestCount, transferSizse);
 			lists.add(resourceSummary);
 		}
 		

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.speed_insight.processor.model.Master;
 import com.speed_insight.processor.service.MainScoreService;
 import com.speed_insight.processor.service.MasterService;
 import com.speed_insight.processor.service.NetworkServerLatencyService;
@@ -39,10 +40,10 @@ public class ProcessorCron {
 		JSONObject target = dataParser.nextTargetData();
 		
 		if (target == null || target.isEmpty()) {
-			System.out.println("Ã³¸®ÇÒ ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.");
+			System.out.println("ì²˜ë¦¬í•  íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.");
 		}
 		else {
-			Long id = masterService.setMasterData(target);
+			Master id = masterService.setMasterData(target);
 			mainScoreService.setMainScoreData(id, target);
 			summaryService.setSummaryData(id, target);
 			resourceSummaryService.setSummaryData(id, target);

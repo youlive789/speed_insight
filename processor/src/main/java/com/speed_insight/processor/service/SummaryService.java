@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.speed_insight.processor.model.Master;
 import com.speed_insight.processor.model.Summary;
 import com.speed_insight.processor.repository.SummaryRepository;
 
@@ -14,11 +15,11 @@ public class SummaryService {
 	@Autowired
 	private SummaryRepository summaryRepository;
 	
-	public void setSummaryData(Long id, JSONObject target) {
+	public void setSummaryData(Master id, JSONObject target) {
 		this.processTarget(id, target);
 	}
 	
-	private void processTarget(Long id, JSONObject target) {
+	private void processTarget(Master id, JSONObject target) {
 		
 		JSONObject audits = (JSONObject)target.get("audits");
 		JSONObject diagnostics = (JSONObject)audits.get("diagnostics");

@@ -2,7 +2,11 @@ package com.speed_insight.processor.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.Builder;
 
@@ -10,8 +14,13 @@ import lombok.Builder;
 public class Summary {
 	
 	@Id
-	@Column(name="ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="SUMMARY_ID")
 	private Long id;
+	
+	@OneToOne
+	@JoinColumn(name="ID")
+	private Master master;
 	
 	@Column(name="NUM_REQUEST")
 	private Integer numRequest;
@@ -49,11 +58,11 @@ public class Summary {
 	public Summary() {}
 	
 	@Builder
-	public Summary(Long id, Integer numRequest, Integer numScripts, Integer numFonts,
+	public Summary(Master master, Integer numRequest, Integer numScripts, Integer numFonts,
 		Integer numTasks, Float rtt, Float throughput, Float maxRtt, Float maxServerLatency, 
 		Float totalByteWeight, Float totalTaskTime, Float mainDocumentTransferSize
 	) {
-		this.id = id;
+		this.master = master;
 		this.numRequest = numRequest;
 		this.numScripts = numScripts;
 		this.numFonts = numFonts;
