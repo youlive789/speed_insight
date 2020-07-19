@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.speed_insight.dashboard.model.MainScore;
 import com.speed_insight.dashboard.model.Master;
+import com.speed_insight.dashboard.model.submodel.AvgMainScore;
 
 @SpringBootTest
 public class MainScoreRepositoryTests {
@@ -21,8 +22,17 @@ public class MainScoreRepositoryTests {
 	private MainScoreRepository repo;
 	
 	@Test
-	void TestgetMainScoreByIds() {
+	void TestGetAvgMainscoreByIds() {
+		List<String> urls = new ArrayList<String>();
+		urls.add("https://www.naver.com/");
 		
+		List<Master> ids = masterRepo.findByUrlIn(urls);
+		AvgMainScore res = repo.findAverageOfMainScoreByMasterIn(ids);
+		System.out.println(res.getCumulativeLayoutShift() + " " + res.getLargestContentfulPaint());
+	}
+	
+	@Test
+	void TestgetMainScoreByIds() {
 		List<Master> ids = new ArrayList<Master>();
 		Optional<Master> res = masterRepo.findById(new Long(25));
 		res.ifPresent(ids::add);

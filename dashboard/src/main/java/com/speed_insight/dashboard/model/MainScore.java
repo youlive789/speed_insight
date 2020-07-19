@@ -56,6 +56,17 @@ public class MainScore {
 		this.totalBlockingTime = totalBlockingTime;
 		this.cumulativeLayoutShift = cumulativeLayoutShift;
 	}
+	
+	@Builder
+	public MainScore(Float firstContentfulPaint, Float speedIndex, Float largestContentfulPaint, 
+			Float timeToInteractive, Float totalBlockingTime, Float cumulativeLayoutShift) {
+		this.firstContentfulPaint = firstContentfulPaint;
+		this.speedIndex = speedIndex;
+		this.largestContentfulPaint = largestContentfulPaint;
+		this.timeToInteractive = timeToInteractive;
+		this.totalBlockingTime = totalBlockingTime;
+		this.cumulativeLayoutShift = cumulativeLayoutShift;
+	}
 
 	public Long getId() {
 		return id;

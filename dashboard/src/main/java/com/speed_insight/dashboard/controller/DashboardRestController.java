@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.speed_insight.dashboard.model.Master;
+import com.speed_insight.dashboard.service.MainScoreService;
 import com.speed_insight.dashboard.service.MasterService;
 import com.speed_insight.dashboard.service.SummaryService;
 import com.speed_insight.dashboard.utils.CollectTargetParser;
@@ -28,20 +29,32 @@ public class DashboardRestController {
 	@Autowired
 	private SummaryService summaryService;
 	
+	@Autowired
+	private MainScoreService mainScoreService;
 	
-	@GetMapping("/test")
-	public String test1(Model model) {
+	@GetMapping("/mainscore/avgPerformanceScore")
+	public String avgPerformanceScoreByUrl() {
+		Map<String, Integer> result = new HashMap<String, Integer>();
+		List<String> urls = null;
 		
-		JSONObject attributes = new JSONObject();
-		attributes.put("test", "123");
-		attributes.put("test1", "123");
-		attributes.put("test2", "123");
-	
-		return attributes.toJSONString();
+		try {
+			urls = parser.getCollectTargetList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		int idx = 0;
+		List<ArrayList<Master>> idLists = masterService.getTargetUrlIds(urls);
+		for (ArrayList<Master> list : idLists) {
+			result.put(urls.get(idx), mainScoreService.getAvgPerformanceScore(list));
+			idx++;
+		}
+		
+		return new JSONObject(result).toJSONString();
 	}
 	
 	@GetMapping("/summary/avgMaxLatencyTime")
-	public String avgByUrl() {
+	public String avgMaxLatencyTimeByUrl() {
 		
 		Map<String, Float> result = new HashMap<String, Float>();
 		List<String> urls = null;
@@ -56,6 +69,28 @@ public class DashboardRestController {
 		List<ArrayList<Master>> idLists = masterService.getTargetUrlIds(urls);
 		for (ArrayList<Master> list : idLists) {
 			result.put(urls.get(idx), summaryService.getAvgMaxServerLatency(list));
+			idx++;
+		}
+		
+		return new JSONObject(result).toJSONString();
+	}
+	
+	@GetMapping("/summary/avgTotalTaskTime")
+	public String avgTotalTaskTimeByUrl() {
+		
+		Map<String, Float> result = new HashMap<String, Float>();
+		List<String> urls = null;
+		
+		try {
+			urls = parser.getCollectTargetList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		int idx = 0;
+		List<ArrayList<Master>> idLists = masterService.getTargetUrlIds(urls);
+		for (ArrayList<Master> list : idLists) {
+			result.put(urls.get(idx), summaryService.getAvgTotalTaskTime(list));
 			idx++;
 		}
 		
