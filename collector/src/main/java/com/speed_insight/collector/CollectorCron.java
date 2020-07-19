@@ -29,7 +29,7 @@ public class CollectorCron {
 		try {
 			this.targetList = targetParser.getCollectTargetList();
 		} catch (Exception e) {
-			System.out.println("target.json ÆÄÀÏÀÌ ¾ø½À´Ï´Ù!");
+			System.out.println("target.json ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
 		} 
 	}
 	
@@ -54,11 +54,12 @@ public class CollectorCron {
 		if (!tmpPath.exists()) tmpPath.mkdir();
 		
 		for (String target : this.targetList) {
+			System.out.println("Now Target : " + target);
 			try {
 				Process process = rt.exec(LIGHTHOUSE_CMD + deviceFlag + " " + target + " > ../data/tmp/" + this.getDateString() + "." + deviceFlag + ".json");
+				process.waitFor();
 			} 
-			catch (IOException e) {
-				System.out.println();
+			catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
 		}

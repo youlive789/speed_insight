@@ -16,14 +16,13 @@ public class MasterService {
 	@Autowired
 	private MasterRepository masterRepository;
 	
-	private final String DIR_TARGET_JSON = "../data/target.json";
-	
 	public List<ArrayList<Master>> getTargetUrlIds(List<String> urls) {
 		
 		List<ArrayList<Master>> targetUrlIds = new ArrayList<ArrayList<Master>>();
 		
 		try {
 			for (String url : urls) {
+				System.out.println(url);
 				System.out.println(this.getMasterByUrl(url).toString());
 				targetUrlIds.add((ArrayList<Master>) this.getMasterByUrl(url));
 			}
