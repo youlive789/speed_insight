@@ -1,5 +1,7 @@
-# speed_insight
+﻿# speed_insight
 Web performance checker using Google Lighthouse.
+
+![Speed Insight Design](https://www.notion.so/geonwookim/Speed-Insight-a882ac7f3016403f903a1b3e4d891662#e6bda937ebca4c6ca4aa9177b6234359)
 
 ### 1. 의존성
  - google lighthouse (현재 윈도우 기준으로 개발되었기 때문에 윈도우 환경에서 nodejs 및 google lighthouse 설치필요)
