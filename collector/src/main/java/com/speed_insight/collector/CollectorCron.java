@@ -20,19 +20,12 @@ public class CollectorCron {
 	private List<String> targetList;
 	
 	private String shellCmd;
-	private final static String LIGHTHOUSE_CMD = "docker run --rm lighthouse ";
-	//private final static String LIGHTHOUSE_CMD = "cmd.exe /C lighthouse --output json --throttling-method=provided --chrome-flags=\"--headless --no-sandbox\" --quiet --only-categories=performance --emulated-form-factor=";
+	//private final static String LIGHTHOUSE_CMD = "docker run --rm lighthouse ";
+	private final static String LIGHTHOUSE_CMD = "lighthouse --output json --throttling-method=provided --chrome-flags=\"--headless --no-sandbox\" --quiet --only-categories=performance --emulated-form-factor=";
 	
 	public CollectorCron() {
 		super();
-		
-		if (System.getProperty("os.name").indexOf("Windows") > -1) {
-			this.shellCmd = "cmd.exe /c ";
-		}
-		else {
-			this.shellCmd = "";
-		}
-		
+				
 		File dataPath = new File("../data");
 		if (!dataPath.exists()) dataPath.mkdir();
 		
@@ -67,7 +60,7 @@ public class CollectorCron {
 		for (String target : this.targetList) {
 			System.out.println("Now Target : " + target);
 			try {
-				String currentCmd = this.shellCmd + LIGHTHOUSE_CMD + deviceFlag + " " + target + " > ../data/tmp/" + this.getDateString() + "." + deviceFlag + ".json";
+				String currentCmd = LIGHTHOUSE_CMD + deviceFlag + " " + target + " > ../data/tmp/" + this.getDateString() + "." + deviceFlag + ".json";
 				System.out.println(currentCmd);
 				Process process = rt.exec(currentCmd);
 				process.waitFor();

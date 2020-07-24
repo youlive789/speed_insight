@@ -1,0 +1,9 @@
+# build script
+docker build --build-arg JAR_FILE=build/libs/*.jar -t collector .
+docker build --build-arg JAR_FILE=build/libs/*.jar -t processor .
+docker build --build-arg JAR_FILE=build/libs/*.jar -t dashboard .
+
+# run script
+docker run -itd -v ./data:/data --name collector collector
+docker run -itd -v ./data:/data --name processor processor
+docker run -itd -v ./data:/data --name dashboard dashboard

@@ -57,7 +57,6 @@ public class MainScore {
 		this.cumulativeLayoutShift = cumulativeLayoutShift;
 	}
 	
-	@Builder
 	public MainScore(Float firstContentfulPaint, Float speedIndex, Float largestContentfulPaint, 
 			Float timeToInteractive, Float totalBlockingTime, Float cumulativeLayoutShift) {
 		this.firstContentfulPaint = firstContentfulPaint;
