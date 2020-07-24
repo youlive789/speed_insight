@@ -16,6 +16,7 @@
 
   <!-- Custom styles for this template-->
   <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="/css/target.css" rel="stylesheet">
 
   <script src="/js/jquery.min.js"></script>
   <script src="/js/bootstrap.bundle.min.js"></script>
@@ -91,15 +92,18 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">수집 URL</h6>
                   <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
+                    <button class="btn-save-target btn btn-primary" type="button">저장</button>
                   </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-area">
-                    <canvas id="performanceChartByUrl"></canvas>
+                    <ul class="url-list">
+                    	<!-- URL 리스트 마크업 -->
+                    	<!-- <li class="url-li">test<span class="url-remove">X</span></li> -->
+                    </ul>
+                    <input id="url-input" class="form-control" type="text" placeholder="url을 입력해주세요">
+                    <button id="url-btn" class="btn btn-primary" type="button">입력</button> 
                   </div>
                 </div>
               </div>

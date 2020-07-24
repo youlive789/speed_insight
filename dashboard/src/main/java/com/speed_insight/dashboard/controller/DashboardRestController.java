@@ -17,6 +17,7 @@ import com.speed_insight.dashboard.model.Master;
 import com.speed_insight.dashboard.service.MainScoreService;
 import com.speed_insight.dashboard.service.MasterService;
 import com.speed_insight.dashboard.service.SummaryService;
+import com.speed_insight.dashboard.service.TargetJsonService;
 import com.speed_insight.dashboard.utils.CollectTargetParser;
 
 @RestController
@@ -33,6 +34,9 @@ public class DashboardRestController {
 	
 	@Autowired
 	private MainScoreService mainScoreService;
+	
+	@Autowired
+	private TargetJsonService targetJsonService;
 	
 	@GetMapping("/mainscore/avgPerformanceScore")
 	public String avgPerformanceScoreByUrl() {
@@ -102,14 +106,31 @@ public class DashboardRestController {
 	@GetMapping("/target/getTargetJson")
 	@ResponseBody
 	public String getTargetJson() {
-		return "S";
+		
+		String result;
+		
+		try {
+			result = targetJsonService.getTargetJson();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result = "{\"result\":\"fail\"}";
+		}
+		return result;
 	}
 	
 	@PostMapping("/target/setTargetJson")
 	@ResponseBody
 	public String setTargetJson(@RequestParam String target) {
-		System.out.println(target);
-		return target;
+		
+		boolean result = targetJsonService.saveTargetJson(target);
+		
+		if (result) {
+			return "{\"result\":\"success\"}";
+		}
+		else {
+			return "{\"result\":\"fail\"}";
+		}
 	}
 	
 }

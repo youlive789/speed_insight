@@ -48,7 +48,7 @@ public class CollectTargetParser {
 		File checkTarget = new File(DIR_TARGET_JSON);
 		String jsonString = "";
 		
-		if (!checkTarget.isFile()) throw new Exception("���Ͼ���!");
+		if (!checkTarget.isFile()) throw new Exception("타겟 파일이 없습니다!");
 		
 		try {
 			targetFile = new FileReader(DIR_TARGET_JSON);
