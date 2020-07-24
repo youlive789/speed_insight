@@ -14,4 +14,8 @@ public class DashboardController {
 		return "main";
 	}	
 
+	@GetMapping("/target")
+	public String targetAddPage(Model model) {
+		return "target";
+	}
 }

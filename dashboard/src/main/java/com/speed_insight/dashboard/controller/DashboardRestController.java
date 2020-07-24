@@ -7,8 +7,10 @@ import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.speed_insight.dashboard.model.Master;
@@ -95,6 +97,19 @@ public class DashboardRestController {
 		}
 		
 		return new JSONObject(result).toJSONString();
+	}
+	
+	@GetMapping("/target/getTargetJson")
+	@ResponseBody
+	public String getTargetJson() {
+		return "S";
+	}
+	
+	@PostMapping("/target/setTargetJson")
+	@ResponseBody
+	public String setTargetJson(@RequestParam String target) {
+		System.out.println(target);
+		return target;
 	}
 	
 }

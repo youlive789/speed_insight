@@ -20,9 +20,7 @@
   <script src="/js/jquery.min.js"></script>
   <script src="/js/bootstrap.bundle.min.js"></script>
   <script src="/js/sb-admin-2.min.js"></script>
-  <script src="/js/Chart.js"></script>
-  <script src="/js/main.data.js"></script>
-  <script src="/js/main.chart.js"></script>
+  <script src="/js/target.js"></script>
 </head>
 
 <body id="page-top">
@@ -45,7 +43,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="/">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>대시보드</span></a>
@@ -60,8 +58,8 @@
       </div>
 
       <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="/target">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>수집 URL 추가</span></a>
       </li>
@@ -83,16 +81,15 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800" style="margin-top:15px">대시보드</h1>
+            <h1 class="h3 mb-0 text-gray-800" style="margin-top:15px">수집 URL</h1>
           </div>
 
           <div class="row">
-
-            <div class="col-xl-12 col-lg-7">
+			
+			<div class="col-xl-12 col-lg-7">
               <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">수집 URL별 평균종합점수</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">수집 URL</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -103,46 +100,6 @@
                 <div class="card-body">
                   <div class="chart-area">
                     <canvas id="performanceChartByUrl"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-xl-12 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">수집 URL별 평균 최대지연시간</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                  </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="maxLatencyChartByUrl"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-xl-12 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">수집 URL별 평균 총 실행시간</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                  </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="totalTaskTimeChartByUrl"></canvas>
                   </div>
                 </div>
               </div>
