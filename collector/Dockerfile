@@ -6,7 +6,9 @@
 
 FROM openjdk:16-jdk-alpine3.12
 
-RUN apk add --no-cache nodejs nodejs-npm
+ENV ALPINE_MIRROR "http://dl-cdn.alpinelinux.org/alpine"
+RUN echo "${ALPINE_MIRROR}/edge/main" >> /etc/apk/repositories
+RUN apk add --no-cache nodejs-current nodejs-npm
 
 ENV CHROME_BIN="/usr/bin/chromium-browser"\
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"

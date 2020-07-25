@@ -34,7 +34,7 @@ public class ProcessorCron {
 	@Autowired
 	private NetworkServerLatencyService networkServerLatencyService;
 	
-	@Scheduled(cron="* * * * * *")
+	@Scheduled(cron="20 * * * * *")
 	public void saveJson() throws Exception {
 		
 		JSONObject target = dataParser.nextTargetData();
@@ -49,5 +49,7 @@ public class ProcessorCron {
 			resourceSummaryService.setSummaryData(id, target);
 			networkServerLatencyService.setNetworkServerLatencyData(id, target);
 		}
+		
+		System.gc();
 	}
 }

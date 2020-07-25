@@ -6,9 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +18,7 @@ public class CollectorCron {
 	
 	private String shellCmd;
 	//private final static String LIGHTHOUSE_CMD = "docker run --rm lighthouse ";
-	private final static String LIGHTHOUSE_CMD = "lighthouse --output json --throttling-method=provided --chrome-flags=\"--headless --no-sandbox\" --quiet --only-categories=performance --emulated-form-factor=";
+	private final static String LIGHTHOUSE_CMD = "/bin/sh -c '/usr/bin/lighthouse --output json --throttling-method=provided --chrome-flags=\"--headless --no-sandbox\" --quiet --only-categories=performance --emulated-form-factor=";
 	
 	public CollectorCron() {
 		super();
@@ -60,14 +57,14 @@ public class CollectorCron {
 		for (String target : this.targetList) {
 			System.out.println("Now Target : " + target);
 			try {
-				String currentCmd = LIGHTHOUSE_CMD + deviceFlag + " " + target + " > ../data/tmp/" + this.getDateString() + "." + deviceFlag + ".json";
+				String currentCmd = LIGHTHOUSE_CMD + deviceFlag + " " + target + " > ../data/tmp/" + this.getDateString() + "." + deviceFlag + ".json'";
 				System.out.println(currentCmd);
 				Process process = rt.exec(currentCmd);
 				process.waitFor();
 			} 
 			catch (IOException | InterruptedException e) {
 				e.printStackTrace();
-			}
+			} 
 		}
 	}
 	
