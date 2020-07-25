@@ -1,0 +1,48 @@
+version: '3'
+services:
+
+  docker-mysql:
+    image: "mysql:latest"
+    ports:
+      - "3306:3306"
+    environment: 
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: speed_insight
+      MYSQL_USER: youlive
+      MYSQL_PASSWORD: 1234
+
+  collector:
+    build: 
+      context: ./collector/
+      args: 
+        - JAR_FILE=build/libs/*.jar
+    ports:
+     - "8700:8700"
+    volumes:
+      - ./data:/data
+    shm_size: '2gb'
+
+  processor:
+    build: 
+      context: ./processor/
+      args: 
+        - JAR_FILE=build/libs/*.jar
+    depends_on:
+      - docker-mysql
+    ports:
+     - "8701:8701"
+    volumes:
+      - ./data:/data
+
+  dashboard:
+    build: 
+      context: ./dashboard/
+      args: 
+        - JAR_FILE=build/libs/*.jar
+    depends_on:
+      - docker-mysql
+    ports:
+     - "8702:8702"
+    volumes:
+      - ./data:/data
