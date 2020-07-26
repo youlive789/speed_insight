@@ -26,7 +26,10 @@ public class CollectorCron {
 	
 	public CollectorCron() {
 		super();
-				
+		prepareTargetJson();
+	}
+	
+	private void prepareTargetJson() {
 		File dataPath = new File("../data");
 		if (!dataPath.exists()) dataPath.mkdir();
 		
@@ -35,26 +38,27 @@ public class CollectorCron {
 			this.targetList = targetParser.getCollectTargetList();
 		} catch (Exception e) {
 			System.out.println("target.json이 없습니다!");
-		} 
+		}
 	}
 	
 	@Scheduled(cron="0 * * * * *")
 	public void desktopJob() throws Exception {
+		prepareTargetJson();
 		if (this.targetList != null) {
 			executeCommand("desktop");
 		}
 	}
 	
-	@Scheduled(cron="0 * * * * *")
+	@Scheduled(cron="10 * * * * *")
 	public void mobileJob() throws Exception {
+		prepareTargetJson();
 		if (this.targetList != null) {
 			executeCommand("mobile");
 		}
 	}
 	
 	private void executeCommand(String deviceFlag) {		
-		Process process = null;
-		ProcessBuilder pb = null;
+
 		StringBuffer successOutput = new StringBuffer();
         StringBuffer errorOutput = new StringBuffer();
 		BufferedReader successBufferReader = null;
@@ -71,14 +75,15 @@ public class CollectorCron {
 			try {
 				
 				String currentCmd = LIGHTHOUSE_CMD + deviceFlag + " " + target + " > ../data/tmp/" + this.getDateString() + "." + deviceFlag + ".json";
+				System.out.println(currentCmd);
 				
 				command = new ArrayList<String>();
 				command.add("/bin/sh");
 				command.add("-c");
 				command.add(currentCmd);
 				
-				pb = new ProcessBuilder(command);
-				process = pb.start();
+				ProcessBuilder pb = new ProcessBuilder(command);
+				Process process = pb.start();
 
 				// shell 실행이 정상 동작했을 경우
 	            successBufferReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -110,14 +115,14 @@ public class CollectorCron {
 	                System.out.println("오류");
 	                System.out.println(errorOutput.toString());
 	            }
-
+	            
+	            process.destroy();
 			} 
 			catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			} 
 			finally {
 				try {
-	                process.destroy();
 	                if (successBufferReader != null) successBufferReader.close();
 	                if (errorBufferReader != null) errorBufferReader.close();
 	            } catch (IOException e1) {
@@ -131,6 +136,11 @@ public class CollectorCron {
 		Date time = new Date();
 		SimpleDateFormat format = new SimpleDateFormat ("yyyyMMddHHmm");				
 		String result = format.format(time);
+		
+		double dValue = Math.random();
+	    char cValue = (char)((dValue * 26) + 65);
+		result += cValue;
+	    
 		return result;
 	}
 }

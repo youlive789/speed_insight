@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,22 +22,23 @@ public class DataParser {
 		return this.getTargetJson();
 	}
 	
+	public List<JSONObject> allTargetData() {
+		return this.getAllTargetJson();
+	}
+	
 	private JSONObject getTargetJson() {
 		File dirDataJson = new File(DIR_DATA_JSON);
 		File[] jsonLists = dirDataJson.listFiles();
 		
-		// JSON 폴더에 아무것도 없다면 빈 객체를 리턴한다.
 		if (jsonLists.length < 1) return new JSONObject();
 		File target = jsonLists[0];
 		
-		// 아직 작업이 완료되지 않은 파일이라면 빈 객체를 리턴한다.
 		if (target.getTotalSpace() < 10) return new JSONObject();
 		
 		String targetJsonString = "";
 		try {
 			targetJsonString = this.readTargetJsonFile(target.getCanonicalPath());
 			
-			// GC에 아직 파일 객체가 남아있다면 파일 삭제가 안된다.
 			System.gc();
 			target.delete();
 		} 
@@ -54,6 +57,40 @@ public class DataParser {
 		}
 		
 		return targetJson;
+	}
+	
+	private List<JSONObject> getAllTargetJson() {
+		File dirDataJson = new File(DIR_DATA_JSON);
+		File[] jsonLists = dirDataJson.listFiles();
+		List<JSONObject> allTargetJson = new ArrayList<JSONObject>();
+		
+		if (jsonLists.length < 1) return new ArrayList<JSONObject>();
+		
+		for (File target : jsonLists) {
+			String targetJsonString = "";
+			try {
+				targetJsonString = this.readTargetJsonFile(target.getCanonicalPath());
+				
+				System.gc();
+				target.delete();
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			JSONObject targetJson = null;
+			JSONParser parser = new JSONParser();
+			try {
+				targetJson = (JSONObject)parser.parse(targetJsonString);
+			} 
+			catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			allTargetJson.add(targetJson);
+		}
+
+		return allTargetJson;
 	}
 	
 	private String readTargetJsonFile(String dirTarget) {
