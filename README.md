@@ -10,8 +10,8 @@ Web performance checker using Google Lighthouse.
     - ./dashborad/gradle build -x test
  2. docker compose 시작
     - docker-compose up -d
- 3. 대쉬보드 접속
-    - 
+ 3. 대쉬보드
+    - http://localhost:8702/
 
 ### 2. 의존성
  - google lighthouse (현재 윈도우 기준으로 개발되었기 때문에 윈도우 환경에서 nodejs 및 google lighthouse 설치필요)
