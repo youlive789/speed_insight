@@ -14,7 +14,7 @@ Web performance checker using Google Lighthouse.
     - http://localhost:8702/
 
 ### 2. 의존성
- - google lighthouse (현재 윈도우 기준으로 개발되었기 때문에 윈도우 환경에서 nodejs 및 google lighthouse 설치필요)
+ - google lighthouse
  - spring-boot
  - mysql
 
