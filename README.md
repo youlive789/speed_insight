@@ -1,4 +1,5 @@
 ﻿# speed_insight
+[![HitCount](http://hits.dwyl.com/youlive789/speed_insight.svg)](http://hits.dwyl.com/youlive789/speed_insight)
 Web performance checker using Google Lighthouse.
 
 ![Speed Insight Design](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F80ce24bb-6371-48ed-8315-e596fa59d931%2Fspeed_insight_design.png?table=block&id=e6bda937-ebca-4c6c-a4aa-9177b6234359&width=3190&cache=v2)
