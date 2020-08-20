@@ -5,9 +5,9 @@ Web performance checker using Google Lighthouse.
 
 ### 1. 사용방법
  1. 프로젝트 빌드
-    - ./collector/gradle build -x test
-    - ./processor/gradle build -x test
-    - ./dashborad/gradle build -x test
+    - ./collector/gradlew build -x test
+    - ./processor/gradlew build -x test
+    - ./dashborad/gradlew build -x test
  2. docker compose 시작
     - docker-compose up -d
  3. 대쉬보드
