@@ -13,6 +13,11 @@ public class DashboardController {
 	public String dashboardMain(Model model) {
 		return "main";
 	}	
+	
+	@GetMapping("/latency")
+	public String latencyPage(Model model) {
+		return "latency";
+	}
 
 	@GetMapping("/target")
 	public String targetAddPage(Model model) {

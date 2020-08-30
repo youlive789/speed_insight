@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.speed_insight.dashboard.model.Master;
+import com.speed_insight.dashboard.model.NetworkServerLatency;
 import com.speed_insight.dashboard.service.MainScoreService;
 import com.speed_insight.dashboard.service.MasterService;
+import com.speed_insight.dashboard.service.NetworkServerLatencyService;
 import com.speed_insight.dashboard.service.SummaryService;
 import com.speed_insight.dashboard.service.TargetJsonService;
 import com.speed_insight.dashboard.utils.CollectTargetParser;
@@ -34,6 +37,9 @@ public class DashboardRestController {
 	
 	@Autowired
 	private MainScoreService mainScoreService;
+	
+	@Autowired
+	private NetworkServerLatencyService networkServerLatencyService;
 	
 	@Autowired
 	private TargetJsonService targetJsonService;
@@ -98,6 +104,24 @@ public class DashboardRestController {
 		for (ArrayList<Master> list : idLists) {
 			result.put(urls.get(idx), summaryService.getAvgTotalTaskTime(list));
 			idx++;
+		}
+		
+		return new JSONObject(result).toJSONString();
+	}
+	
+	@GetMapping("/latency/latencyByUrl")
+	public String latencyByUrl(@RequestParam(value = "url") String url) {
+		
+		System.out.println(url);
+		
+		Map<String, List<String>> result = new HashMap<String, List<String>>();
+		result.put("origin", new ArrayList<String>());
+		result.put("server_response_time", new ArrayList<String>());
+		
+		List<NetworkServerLatency> latency = networkServerLatencyService.getLatestNetworkLatencyByUrl(url);
+		for (NetworkServerLatency l : latency) {
+			result.get("origin").add(l.getOrigin());
+			result.get("server_response_time").add(l.getServerResponseTime().toString());
 		}
 		
 		return new JSONObject(result).toJSONString();

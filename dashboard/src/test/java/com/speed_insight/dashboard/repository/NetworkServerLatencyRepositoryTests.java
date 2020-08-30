@@ -31,6 +31,5 @@ public class NetworkServerLatencyRepositoryTests {
 		for (NetworkServerLatency n : lists) {
 			System.out.println(n.getOrigin().toString() + " " + n.getServerResponseTime().toString());
 		}
-		
 	}
 }
